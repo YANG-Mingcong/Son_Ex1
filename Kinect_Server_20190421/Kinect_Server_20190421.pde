@@ -1,3 +1,7 @@
+/*
+Author:YANG Mingcong
+*/
+
 import KinectPV2.KJoint;
 import KinectPV2.*;
 
