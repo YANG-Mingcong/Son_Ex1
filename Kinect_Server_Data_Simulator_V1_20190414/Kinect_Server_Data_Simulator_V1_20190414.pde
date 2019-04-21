@@ -1,0 +1,172 @@
+import processing.net.*;
+
+Server s;
+Client c;
+String input;
+int[] dataSend=new int[9];
+
+//int x1,y1,z1,x2,y2,z2,hSize,channel,rhHeight,d;
+int[] x1=new int[9],y1=new int[9],z1=new int[9],x2=new int[9],y2=new int[9],z2=new int[9],hSize=new int[9],channel=new int[9],rhHeight=new int[9],d=new int[9];
+int totalUser; //Globle int for person number
+boolean[] isEnable=new boolean[9];
+boolean[] isSelect=new boolean[9];
+
+void setup() 
+{
+  size(1280, 720);
+  stroke(0);
+  frameRate(30); // Slow it down a little
+  s = new Server(this, 12345); // Start a simple server on a port
+  
+  
+  for(int i=0;i<9;i++){
+    
+      x1[i] = 200+60*i;
+      y1[i] = 200+60*i;
+      z1[i] = 0;
+      
+      x2[i] = 600+60*i;
+      y2[i] = 200+60*i;
+      z2[i] = 0;
+      
+      hSize[i] = 110;
+      channel[i] = -1;
+      rhHeight[i] = 96;
+            
+      d[i]=20;
+  }
+  
+
+  
+}
+
+void draw() 
+{
+  background(204);
+  
+  rectMode(RADIUS);
+  textSize(40);
+  strokeWeight(4);
+  
+  int boxNumber = 4;
+  
+  
+  //basic interface
+  for(int i=0;i<=boxNumber;i++){
+    if(isEnable[i]==true){
+      fill(#AFFF95);
+      channel[i] = i;
+    }else{
+      fill(#FF9597);
+      channel[i] = -1;//disable
+    }
+  
+    if(isSelect[i]==true){
+      stroke(#FCE10D);
+    }else{
+      stroke(0);
+    }
+    
+    rect(50*i+50,50,20,20);
+    
+    fill(50);
+    text(i,50*i+38,65);
+  }
+  
+  textSize(10);
+  text("Data Channel:",30,15);
+  //See mouseRelease
+  
+  
+  
+  for(int i=0;i<=boxNumber;i++){
+      if(isSelect[i]==true){
+        stroke(#FCE10D);
+      }else{
+        stroke(0);
+      }  
+    
+      fill(0,0,255);
+      rect(x1[i], y1[i], d[i], d[i]);
+      fill(255,0,0);
+      rect(x2[i], y2[i], d[i], d[i]);
+      line(x1[i], y1[i], x2[i], y2[i]);
+  }
+  
+  
+  
+  
+    for(int i=0;i<=boxNumber;i++){
+        if(isEnable[i]){
+            dataSend[0] = x1[i];
+            dataSend[1] = y1[i];
+            dataSend[2] = z1[i];
+            
+            dataSend[3] = x2[i];
+            dataSend[4] = y2[i];
+            dataSend[5] = z2[i];
+            
+            dataSend[6] = hSize[i]; //distance from middle of shoulder to middle of body, present the distance from people to KINECT.
+            
+            dataSend[7] = i;//id of KINECT skeleton, present the different instruments.
+            
+            dataSend[8] = rhHeight[i];//distance from right hand to middle of body in Y-axis, present the volume.
+            
+            dataSend[9] = totalUser;
+            
+            sendData();
+            //s.write(pmouseX + " " + pmouseY + " " + mouseX + " " + mouseY + "\n");
+        }
+    }
+    
+    
+    println(frameRate);
+}
+
+void sendData(){
+  for(int i=0;i<=8;i++){
+      if(i<8) {  s.write(dataSend[i] + " ");
+        } else {  s.write(dataSend[i] +"\n");}
+    }
+println("Sent");
+
+
+}
+
+void mouseClicked(){
+  int boxNumber = 4;
+  
+  //mouseClicked Function of box Select % Enable
+  for(int i=0;i<=boxNumber;i++){
+     //LEFT Button for Select
+      if(mouseX> 50*i+30 && mouseX < 50*i+80 && mouseY > 30 && mouseY < 80 && mouseButton==LEFT){
+          isSelect[i]=!isSelect[i];
+      }
+     //END Select if
+      
+     //RIGHT Button for Enable
+      if(mouseX> 50*i+30 && mouseX < 50*i+80 && mouseY > 30 && mouseY < 80 && mouseButton==RIGHT){ 
+          isEnable[i]=!isEnable[i];
+      }
+     //END Enable if
+  }
+  //END mouseClicked Function of box Select & Enable
+}
+
+void mouseDragged(){
+  int boxNumber = 4;
+  
+  for(int i=0;i<=boxNumber;i++){
+
+        if(mouseX> x1[i] - d[i] && mouseX < x1[i] + d[i] && mouseY > y1[i] - d[i] && mouseY < y1[i] + d[i] && isSelect[i]){
+          x1[i]=mouseX;
+          y1[i]=mouseY;
+        }
+        
+        
+        if(mouseX> x2[i] - d[i] && mouseX < x2[i] + d[i] && mouseY > y2[i] - d[i] && mouseY < y2[i] + d[i] && isSelect[i]){
+          x2[i]=mouseX;
+          y2[i]=mouseY;
+        }
+  }
+}
