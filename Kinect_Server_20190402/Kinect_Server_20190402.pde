@@ -1,6 +1,7 @@
 import KinectPV2.KJoint;
 import KinectPV2.*;
 
+import processing.net.*;
 
 KinectPV2 kinect;
 
