@@ -1,8 +1,4 @@
-/*
-Author:YANG Mingcong
-*/
-
-import KinectPV2.KJoint;
+ import KinectPV2.KJoint;
 import KinectPV2.*;
 
 import processing.net.*;
@@ -94,7 +90,6 @@ void draw() {
       s.write(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + i + " " + rhHeight + "\n");
       println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + i + " " + rhHeight + "\n");
     }
-    s.write("\\");  //server dataset end 
   }
   
   
