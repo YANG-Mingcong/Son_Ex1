@@ -31,6 +31,23 @@ Data Simulator:
 ----------------------------END-------------------------------
 
 
+----------------------2019-99-99-UPDATE-----------------------
+
+Server Part：
+1. Using ’skeletonArrayZ' get right Z value for meter
+
+
+Client Part:
+1. Using keyPressed 'P'control the 'sendMIDI'
+
+Data Simulator:
+Null
+
+----------------------------END-------------------------------
+
+
+
+
 
 ----------------------2019-04-19-UPDATE-----------------------
 
@@ -39,9 +56,12 @@ Null
 
 Client Part:
 1. Re-construction the all code for support 10 people using.
+2. Globle int maxData for instead of maxBox or int[9]
 
 Data Simulator:
 1. Re-construction the all code for support 10 people tesing.
+2. Globle int maxData for instead of maxBox or int[9]
+
 
 ----------------------------END-------------------------------
 
