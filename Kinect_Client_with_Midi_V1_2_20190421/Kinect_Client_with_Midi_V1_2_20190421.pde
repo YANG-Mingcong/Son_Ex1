@@ -48,8 +48,8 @@ void setup()
   size(1280, 720, P3D);
   frameRate(25);
   // Connect to the server's IP address and port
-  c = new Client(this, "192.168.111.164", 12345); // Replace with your server's IP and port
-  //c = new Client(this, "127.0.0.1", 12345); // Replace with your server's IP and port
+  //c = new Client(this, "192.168.111.164", 12345); // Replace with your server's IP and port
+  c = new Client(this, "192.168.111.101", 12345); // Replace with your server's IP and port
   
   MidiBus.list(); // List all available Midi devices on STDOUT. This will show each device's index and name.
 
