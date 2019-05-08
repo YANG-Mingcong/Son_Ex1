@@ -34,10 +34,12 @@ Data Simulator:
 ----------------------2019-05-07-UPDATE-----------------------
 
 Server Part：
-1. Add Skeleton ID instead of i sent in data[7]
+1. Add Skeleton ID instead of 'i' sent in data[7]
 
 Client Part:
 1. Recieve Skeleton ID, But not so good. Except MIDIChannel 0， others Tempo is to fast. To Be Check...
+2. change boolean "threadEnd[data[7]]" index from "i" to "sid" aka "data[7]". Solved problem below
+3. Change maxData from "10" to "6" due to Kinect V2 Maximum Full Skeleton Traking number is 6.
 
 Data Simulator:
 Null

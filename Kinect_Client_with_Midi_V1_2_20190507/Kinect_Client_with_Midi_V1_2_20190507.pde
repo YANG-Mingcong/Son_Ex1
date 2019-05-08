@@ -5,7 +5,7 @@ Author : YANG Mingcong
 import themidibus.*; //Import the library for MIDI
 import processing.net.*;//Import the library for Network
 
-int maxData = 10;                    //define Maximum DataSet 
+int maxData = 6;                    //define Maximum DataSet 
 
 //Class MyThread is for creating sub-thread to deal with the problem of delay
 MyThread thread;
@@ -48,8 +48,8 @@ void setup()
   size(1280, 720, P3D);
   frameRate(20);
   // Connect to the server's IP address and port
-  //c = new Client(this, "192.168.111.164", 12345); // Replace with your server's IP and port
-  c = new Client(this, "192.168.1.139", 12345); // Replace with your server's IP and port
+  c = new Client(this, "192.168.111.164", 12345); // Replace with your server's IP and port
+  //c = new Client(this, "192.168.1.139", 12345); // Replace with your server's IP and port
   
   MidiBus.list(); // List all available Midi devices on STDOUT. This will show each device's index and name.
 
@@ -168,7 +168,7 @@ void draw()
     }
   
   //dataToNote(hSize,rhVol,pitch);
-  if(threadEnd[i]){
+  if(threadEnd[data[7]]){
   thread =new MyThread();
   thread.sendValue(hSize, rhVol,pitch,data[7]);
   println("Start Thread  " +i +"   Time "+millis());
