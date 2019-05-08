@@ -43,14 +43,26 @@ void draw() {
 
       color col  = skeleton.getIndexColor();
       
+      int sid=1;
+      
       int a = (col >> 24) & 0xFF;
       int r = (col >> 16) & 0xFF;  // Faster way of getting red(argb)
       int g = (col >> 8) & 0xFF;   // Faster way of getting green(argb)
       int b = col & 0xFF;          // Faster way of getting blue(argb)
       
+      if(col==color(0, 0, 255)){sid = 0;}
+      if(col==color(0, 255, 0)){sid = 1;}
+      if(col==color(255, 0, 0)){sid = 2;}
+      if(col==color(255, 255, 0)){sid = 3;}
+      if(col==color(255, 0, 255)){sid = 4;}
+      if(col==color(0, 255, 255)){sid = 5;}
+      
+      
+      
+      
       fill(col);
       stroke(col);
-      text("skeleton color: " + a +"-"+ r +"-"+ g +"-"+ b, 50, 120);
+      text("skeleton color: " + a +"-"+ r +"-"+ g +"-"+ b +"  ID:" + sid , 50, 120);
       drawBody(joints);
 
       //draw different color for each hand state
@@ -91,8 +103,8 @@ void draw() {
 //END of change     
       
       
-      s.write(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + i + " " + rhHeight + "\n");
-      println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + i + " " + rhHeight + "\n");
+      s.write(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + sid + " " + rhHeight + "\n");
+      println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + sid + " " + rhHeight + "\n");
     }
     s.write("\\");  //server dataset end 
   }
