@@ -31,7 +31,28 @@ Data Simulator:
 ----------------------------END-------------------------------
 
 
-----------------------2019-99-99-UPDATE-----------------------
+----------------------2019-05-07-UPDATE-----------------------
+
+Server Part：
+1. Add Skeleton ID instead of i sent in data[7]
+
+Client Part:
+1. Recieve Skeleton ID, But not so good. Except MIDIChannel 0， others Tempo is to fast. To Be Check...
+
+Data Simulator:
+Null
+
+----------------------------END-------------------------------
+
+
+
+
+
+
+
+
+
+----------------------2019-04-21-UPDATE-----------------------
 
 Server Part：
 1. Using ’skeletonArrayZ' get right Z value for meter
