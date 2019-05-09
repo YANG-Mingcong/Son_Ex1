@@ -96,15 +96,16 @@ void draw() {
       y2 = int(joints[KinectPV2.JointType_HandRight].getY());
       z2 = int(jointsZ[KinectPV2.JointType_HandRight].getZ()*1000.0);
       
+      int wSize = int(100.0*abs(joints[KinectPV2.JointType_HandRight].getX()-joints[KinectPV2.JointType_HandLeft].getX()) / abs(joints[KinectPV2.JointType_ShoulderRight].getX()-joints[KinectPV2.JointType_ShoulderLeft].getX()));
       //hSize means the distance from middle of body to middle of shoulder, which present the distance from people to kinect.
-      hSize = int(abs(joints[KinectPV2.JointType_SpineShoulder].getY()-joints[KinectPV2.JointType_SpineMid].getY()));
+      //hSize = int(abs(joints[KinectPV2.JointType_SpineShoulder].getY()-joints[KinectPV2.JointType_SpineMid].getY()));
       //rhHeight means the distance from right hand to middle of body in Y-axis
-      rhHeight =  int(abs(joints[KinectPV2.JointType_HandRight].getY()-joints[KinectPV2.JointType_SpineMid].getY())/ abs(joints[KinectPV2.JointType_Head].getY()-joints[KinectPV2.JointType_SpineMid].getY())*100);
+      rhHeight =  int(abs(joints[KinectPV2.JointType_HandRight].getY()-joints[KinectPV2.JointType_SpineBase].getY())/ abs(joints[KinectPV2.JointType_SpineShoulder].getY()-joints[KinectPV2.JointType_SpineBase].getY())*100);
 //END of change     
       
       
-      s.write(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + sid + " " + rhHeight + "\n");
-      println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + hSize + " " + sid + " " + rhHeight + "\n");
+      s.write(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + wSize + " " + sid + " " + rhHeight + "\n");
+      println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2 + " " + wSize + " " + sid + " " + rhHeight + "\n");
     }
     s.write("\\");  //server dataset end 
   }
