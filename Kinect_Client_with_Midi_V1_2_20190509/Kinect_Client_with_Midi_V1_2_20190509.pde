@@ -32,6 +32,8 @@ MidiBus myBus;
 //MAccords MA1 = new MAccords();    //Old
 //Define different Pitch number of Base note in MIDI
 int [] m = {36,38,40,41,43,45,47,  48,50,52,53,55,57,59,  60,62,64,65,67,69,71,  72,74,76,77,79,81,83};
+int [] m2 = {  48,50,52,53,55,57,59,  60,62,64,65,67,69,71};
+int [] m3 = {50,52,53,55,57,59,  60,62,64};
 int [] mBase = {0,2,4,5,7,9,11}; //c.d.e.f.g.a.b. + 12*n
 int [] mBaseCanon = {12,7,9,4,5,4,2,7};  //c,g,a,e,f,e,d,g, + 12*n
 
@@ -153,24 +155,36 @@ void draw()
     //MA1.changeNC(data[7]);//change Channel
     
     
-    int hSize = data[6];
+    //int hSize = data[6];
+    //using wSize instead of hSize, to present the arms status, and control pitch status.
+    int wSize = data [6];
+    
+    //control how may notes in array.
+    if(wSize<30){pitch = 24+mBaseCanon[myFindGrid.y()%(m3.length-1)];}
+    if(wSize>=30 && wSize<80){pitch = 12+m3[myFindGrid.y()%(m3.length-1)];}
+    if(wSize>=80 && wSize<280){pitch = 8+m2[myFindGrid.y()%(m2.length-1)];}
+    if(wSize>280){pitch = m[myFindGrid.y()%(m.length-1)];}
     
     int rhVol;
     float rhHiRec = data[8]/100;
     if (rhHiRec < 1){
       rhVol = int( rhHiRec * 66 ) + 30;
       }else{
-        if (rhHiRec >= 1 && rhHiRec < 2){
+        if (rhHiRec >= 1 && rhHiRec < 1.4){
           rhVol = int(( rhHiRec - 1 ) * 30 ) + 96;
         }else{
-          rhVol=127;
+          rhVol=110;
         }
     }
+    
+    
   
   //dataToNote(hSize,rhVol,pitch);
   if(threadEnd[data[7]]){
   thread =new MyThread();
-  thread.sendValue(hSize, rhVol,pitch,data[7]);
+  //thread.sendValue(hSize, rhVol,pitch,data[7]);
+  //using Z data instead of hSize
+  thread.sendValue(data[2], rhVol,pitch,data[7]);
   println("Start Thread  " +i +"   Time "+millis());
   thread.start();
   }else{

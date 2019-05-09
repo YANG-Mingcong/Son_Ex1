@@ -10,7 +10,9 @@ data[3] = x2;
 data[4] = y2;
 data[5] = z2;
 
-data[6] = hSize; //distance from middle of shoulder to middle of body, present the distance from people to KINECT.
+//data[6] = hSize; //distance from middle of shoulder to middle of body, present the distance from people to KINECT.
+data[6] = wSize; //ratio of distance from 2hands with distance from 2 shoulder, present the status of arms
+
 
 data[7] = channel;//id of KINECT skeleton, present the different instruments.
 
@@ -28,6 +30,23 @@ Client Part:
 
 Data Simulator:
 
+----------------------------END-------------------------------
+
+----------------------2019-05-09-UPDATE-----------------------
+**On-Site Changings
+
+Server Part：
+1. Add new int wSize for data[6] present the status of arms.
+2. Change data[6], using wSize instead of hSize.
+
+
+Client Part:
+1. Change mode of NoteOFF. Sounds more nature.
+2. Change MainStage Part to reduce instrument from 10 to 6.
+3. using Z1 data instead of hSize
+
+Data Simulator:
+Null
 ----------------------------END-------------------------------
 
 
