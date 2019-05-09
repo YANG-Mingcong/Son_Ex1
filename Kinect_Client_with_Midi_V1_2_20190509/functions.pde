@@ -22,10 +22,19 @@ public class MyThread extends Thread{
       
       //Using Boolean 'sendMIDI' to control if send MIDI message
       if(sendMIDI){
+        /**
         if(hSize > 200)                 {MA1.changeNV(rhVol-30);MA1.MM3(pitch);}
         if(hSize < 200 && hSize > 100)  {MA1.changeNV(rhVol);MA1.M3(pitch);}
         if(hSize < 100 && hSize > 50)   {MA1.changeNV(rhVol);MA1.m3(pitch);}
         if(hSize < 50  && hSize > 10)   {MA1.changeNV(rhVol);MA1.mm3(pitch);}  
+        **/
+        //using Z to control
+        if(hSize < 2000)                 {MA1.changeNV(rhVol-30);MA1.MM3(pitch);}
+        if(hSize < 3000 && hSize >= 2000)  {MA1.changeNV(rhVol);MA1.M3(pitch);}
+        if(hSize < 4000 && hSize >= 3000)   {MA1.changeNV(rhVol);MA1.m3(pitch);}
+        if(hSize < 10000  && hSize >= 4000)   {MA1.changeNV(rhVol);MA1.mm3(pitch);}  
+        
+        
       }
       
       threadEnd[channel] = true;
