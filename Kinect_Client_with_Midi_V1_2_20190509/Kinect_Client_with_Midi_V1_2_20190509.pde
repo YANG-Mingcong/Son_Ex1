@@ -170,10 +170,10 @@ void draw()
     if (rhHiRec < 1){
       rhVol = int( rhHiRec * 66 ) + 30;
       }else{
-        if (rhHiRec >= 1 && rhHiRec < 2){
+        if (rhHiRec >= 1 && rhHiRec < 1.4){
           rhVol = int(( rhHiRec - 1 ) * 30 ) + 96;
         }else{
-          rhVol=127;
+          rhVol=110;
         }
     }
     

@@ -29,10 +29,10 @@ public class MyThread extends Thread{
         if(hSize < 50  && hSize > 10)   {MA1.changeNV(rhVol);MA1.mm3(pitch);}  
         **/
         //using Z to control
-        if(hSize < 2000)                 {MA1.changeNV(rhVol-30);MA1.MM3(pitch);}
-        if(hSize < 3000 && hSize >= 2000)  {MA1.changeNV(rhVol);MA1.M3(pitch);}
-        if(hSize < 4000 && hSize >= 3000)   {MA1.changeNV(rhVol);MA1.m3(pitch);}
-        if(hSize < 10000  && hSize >= 4000)   {MA1.changeNV(rhVol);MA1.mm3(pitch);}  
+        if(hSize < 1500)                 {MA1.changeNV(rhVol-30);MA1.MM3(pitch);}
+        if(hSize < 3500 && hSize >= 1500)  {MA1.changeNV(rhVol);MA1.M3(pitch);}
+        if(hSize < 4200 && hSize >= 3500)   {MA1.changeNV(rhVol);MA1.m3(pitch);}
+        if(hSize < 10000  && hSize >= 4200)   {MA1.changeNV(rhVol);MA1.mm3(pitch);}  
         
         
       }
@@ -72,28 +72,39 @@ private int nChannel=-1, nVelocity=-1;
     int delayTime = 200;
     
     println("Real Start Time "+millis());    //Data Monitor
+    
+    if(channel == 5){
+      myBus.sendNoteOn(channel, bassNote, velocity); // Send a Midi noteOn  
+      velocity = nVelocity;
+      delay(delayTime*4);
+      
+      myBus.sendNoteOff(channel, bassNote, velocity); // Send a Midi nodeOff
+      
+    }else{
         
-    myBus.sendNoteOn(channel, bassNote, velocity); // Send a Midi noteOn  
-
-    delay(delayTime);
- 
-    myBus.sendNoteOn(channel, bassNote+midNote, int(velocity*0.5)); // Send a Midi noteOn
-
-    delay(delayTime);
+      myBus.sendNoteOn(channel, bassNote, velocity); // Send a Midi noteOn  
+  
+      delay(delayTime);
    
-    myBus.sendNoteOn(channel, bassNote+midNote+endNote, int(velocity*0.7)); // Send a Midi noteOn
-   
-    delay(delayTime);
-   
-    myBus.sendNoteOn(channel, bassNote+12, int(velocity*0.6)); // Send a Midi noteOn
-   
-    velocity = nVelocity;
-    delay(delayTime);
-    myBus.sendNoteOff(channel, bassNote, velocity); // Send a Midi nodeOff
-    myBus.sendNoteOff(channel, bassNote+midNote, velocity); // Send a Midi nodeOff
-    myBus.sendNoteOff(channel, bassNote+midNote+endNote, velocity); // Send a Midi nodeOff
-    myBus.sendNoteOff(channel, bassNote+12, velocity); // Send a Midi nodeOff
+      myBus.sendNoteOn(channel, bassNote+midNote, int(velocity*0.5)); // Send a Midi noteOn
+  
+      delay(delayTime);
+     
+      myBus.sendNoteOn(channel, bassNote+midNote+endNote, int(velocity*0.7)); // Send a Midi noteOn
+     
+      delay(delayTime);
+     
+      myBus.sendNoteOn(channel, bassNote+12, int(velocity*0.6)); // Send a Midi noteOn
+     
+      velocity = nVelocity;
+      delay(delayTime);
+      myBus.sendNoteOff(channel, bassNote, velocity); // Send a Midi nodeOff
+      myBus.sendNoteOff(channel, bassNote+midNote, velocity); // Send a Midi nodeOff
+      myBus.sendNoteOff(channel, bassNote+midNote+endNote, velocity); // Send a Midi nodeOff
+      myBus.sendNoteOff(channel, bassNote+12, velocity); // Send a Midi nodeOff
     //myBus.sendControllerChange(channel, 123, 0);
+    
+    }
   }
   
   
